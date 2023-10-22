@@ -35,15 +35,18 @@ public class AlarmPlayback : MonoBehaviour
 
     private void ChangeVolume()
     {
+        float targetVolume;
+        
         if (_isPlaying == true)
         {
-            _currentVolume = Mathf.MoveTowards(_currentVolume, _endVolume, _recoveryRate * Time.deltaTime);
+            targetVolume = _endVolume;
         }
         else
         {
-            _currentVolume = Mathf.MoveTowards(_currentVolume, _startVolume, _recoveryRate * Time.deltaTime);
+            targetVolume = _startVolume;
         }
         
+        _currentVolume = Mathf.MoveTowards(_currentVolume, targetVolume, _recoveryRate * Time.deltaTime);
         _audioSource.volume = _currentVolume;
         
         if (_audioSource.volume <= _startVolume)
